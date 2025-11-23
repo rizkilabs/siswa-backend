@@ -1,4 +1,21 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+function success(res, status = 200, data = {}, message = "OK") {
+  return res.status(status).json({
+    success: true,
+    status,
+    message,
+    data,
+  });
+}
 
-module.exports = prisma;
+function fail(res, status = 400, error = "Bad Request") {
+  return res.status(status).json({
+    success: false,
+    status,
+    error,
+  });
+}
+
+module.exports = {
+  success,
+  fail,
+};
